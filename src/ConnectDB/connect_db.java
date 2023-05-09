@@ -15,11 +15,11 @@ import java.sql.SQLException;
 public class connect_db {
     public static Connection getConnection() throws ClassNotFoundException,  
             SQLException{
-        Class.forName("oracle.jdbc.driver.OracleDriver");
+//        Class.forName("oracle.jdbc.driver.OracleDriver");
 
-        String connectionURL = "jdbc:mysql://localhost:3306/charity_management_app";
+        String connectionURL = "jdbc:mysql://103.75.185.190:5001/charity_management_app";
         String username = "root";
-        String password = "charityapp";
+        String password = "password";
 
         Connection conn = DriverManager.getConnection(connectionURL, username,
                 password);
