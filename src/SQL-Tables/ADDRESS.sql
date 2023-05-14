@@ -16,3 +16,8 @@ CREATE TABLE ADDRESS
     CITY NVARCHAR (50) NOT NULL,
     PROVINCE NVARCHAR (50) NOT NULL
 );
+
+INSERT INTO ADDRESS VALUES (1, 'Đông Lâm 2', 'An Nhơn', 'Bình Định');
+INSERT INTO ADDRESS VALUES (2, '', 'Tri Tôn', 'An Giang');
+INSERT INTO ADDRESS VALUES (3, '', 'Ngũ Hành Sơn', 'Đà Nẵng');
+INSERT INTO ADDRESS VALUES (4, '', 'Cao Lãnh', 'Đồng Tháp');
