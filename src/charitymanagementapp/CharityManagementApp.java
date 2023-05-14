@@ -5,6 +5,7 @@
 package charitymanagementapp;
 
 import ConnectDB.connect_db;
+import Views.Main.Dashboard;
 import java.sql.Connection;
 import java.sql.SQLException;
 
@@ -31,6 +32,9 @@ public class CharityManagementApp {
             return;
         }
         System.out.println("Connected to database successfully");
+        
+        Dashboard dashboard = new Dashboard();
+        dashboard.setVisible(true);
     }
     
 }
