@@ -45,6 +45,8 @@ public class AddDonor extends javax.swing.JPanel {
         jComboBox3 = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
 
+        setMinimumSize(new java.awt.Dimension(330, 510));
+        setPreferredSize(new java.awt.Dimension(350, 510));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N

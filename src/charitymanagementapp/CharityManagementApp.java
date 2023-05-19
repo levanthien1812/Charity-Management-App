@@ -25,13 +25,13 @@ public class CharityManagementApp {
      */
     public static void main(String[] args)  throws SQLException, ClassNotFoundException{
         // TODO code application logic here
-        System.out.println("Connecting to database ...");
-        Connection con = CharityManagementApp.getConnection();
-        if (con == null) {
-            System.out.print("Fail to connect to database!");
-            return;
-        }
-        System.out.println("Connected to database successfully");
+//        System.out.println("Connecting to database ...");
+//        Connection con = CharityManagementApp.getConnection();
+//        if (con == null) {
+//            System.out.print("Fail to connect to database!");
+//            return;
+//        }
+//        System.out.println("Connected to database successfully");
         
         Dashboard dashboard = new Dashboard();
         dashboard.setVisible(true);
