@@ -4,12 +4,10 @@
  */
 package Views.Main;
 
-import ConnectDB.connect_db;
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.sql.ResultSet;
-import javax.swing.table.DefaultTableModel;
+import Controller.ChuyenManHinhController;
+import java.util.ArrayList;
+import java.util.List;
+
 
 /**
  *
@@ -22,30 +20,17 @@ public class Dashboard extends javax.swing.JFrame {
      */
     public Dashboard() {
         initComponents();
+        setTitle("Quan ly tu thien");
         
-        try {
-            Connection conn = connect_db.getConnection();
-            Statement st = conn.createStatement();
-            String query = "SELECT * FROM DONOR";
-            ResultSet rs = st.executeQuery(query);
-            
-            DefaultTableModel model = (DefaultTableModel) jXTable1.getModel();
-            String id, name, gender, email, phone, score;
-            while (rs.next()) {
-                id = rs.getString(1);
-                name = rs.getString(2);
-                gender = rs.getString(3);
-                email = rs.getString(7);
-                phone = rs.getString(4);
-                score = rs.getString(8);
-                String[] row = {id, name, gender, score, phone, email};
-                model.addRow(row);
-            }
-            st.close();
-            conn.close();
-        } catch (ClassNotFoundException | SQLException e) {
-            e.printStackTrace();
-        }
+        ChuyenManHinhController controller = new ChuyenManHinhController(contentPanel);
+        controller.setView(dashboardBtn);
+        
+        List<DanhMucBean> danhMuc = new ArrayList<>();
+        danhMuc.add(new DanhMucBean("dashboard", dashboardBtn));
+        danhMuc.add(new DanhMucBean("donors_receivers", donorsReceiversBtn));
+        danhMuc.add(new DanhMucBean("donations_distributions", DonationsDistributionsBtn));
+        danhMuc.add(new DanhMucBean("events", eventsBtn));
+        controller.setEvent(danhMuc);
     }
 
     /**
@@ -57,294 +42,119 @@ public class Dashboard extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jPanel11 = new javax.swing.JPanel();
-        jTabbedPane1 = new javax.swing.JTabbedPane();
-        jPanel12 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jXTable1 = new org.jdesktop.swingx.JXTable();
-        jButton6 = new javax.swing.JButton();
-        jPanel13 = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
-        jPanel3 = new javax.swing.JPanel();
-        jPanel7 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jPanel8 = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jPanel4 = new javax.swing.JPanel();
-        jPanel9 = new javax.swing.JPanel();
-        jLabel6 = new javax.swing.JLabel();
-        jPanel10 = new javax.swing.JPanel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        jPanel5 = new javax.swing.JPanel();
-        jPanel6 = new javax.swing.JPanel();
+        sideBarPanel = new javax.swing.JPanel();
+        logoutBtn = new javax.swing.JButton();
+        eventsBtn = new javax.swing.JButton();
+        dashboardBtn = new javax.swing.JButton();
+        donorsReceiversBtn = new javax.swing.JButton();
+        DonationsDistributionsBtn = new javax.swing.JButton();
+        logoPanel = new javax.swing.JPanel();
+        appNameLabel = new javax.swing.JLabel();
+        contentPanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(1180, 700));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setBackground(new java.awt.Color(0, 102, 204));
-        jPanel1.setAutoscrolls(true);
-        jPanel1.setPreferredSize(new java.awt.Dimension(250, 700));
-        jPanel1.setRequestFocusEnabled(false);
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        sideBarPanel.setBackground(new java.awt.Color(0, 102, 204));
+        sideBarPanel.setAutoscrolls(true);
+        sideBarPanel.setPreferredSize(new java.awt.Dimension(250, 700));
+        sideBarPanel.setRequestFocusEnabled(false);
+        sideBarPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("CharmanApp");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 20, -1, -1));
+        logoutBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        logoutBtn.setText("Log out");
+        logoutBtn.setToolTipText("");
+        logoutBtn.setBorder(null);
+        sideBarPanel.add(logoutBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 590, 130, 30));
 
-        jButton1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jButton1.setText("Log out");
-        jButton1.setToolTipText("");
-        jButton1.setBorder(null);
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 590, 130, 30));
-
-        jButton2.setBackground(new java.awt.Color(204, 255, 255));
-        jButton2.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources.Images/calendar-star.png"))); // NOI18N
-        jButton2.setText("Events");
-        jButton2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jButton2.setIconTextGap(12);
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        eventsBtn.setBackground(new java.awt.Color(204, 255, 255));
+        eventsBtn.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        eventsBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources.Images/calendar-star.png"))); // NOI18N
+        eventsBtn.setText("Events");
+        eventsBtn.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        eventsBtn.setIconTextGap(12);
+        eventsBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                eventsBtnActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 300, 230, 50));
+        sideBarPanel.add(eventsBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 330, 230, 50));
 
-        jButton3.setFont(new java.awt.Font("Segoe UI Semibold", 1, 16)); // NOI18N
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources.Images/dashboard_1.png"))); // NOI18N
-        jButton3.setText("Dashboard");
-        jButton3.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jButton3.setIconTextGap(12);
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        dashboardBtn.setBackground(new java.awt.Color(204, 255, 255));
+        dashboardBtn.setFont(new java.awt.Font("Segoe UI Semibold", 1, 16)); // NOI18N
+        dashboardBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources.Images/dashboard_1.png"))); // NOI18N
+        dashboardBtn.setText("Dashboard");
+        dashboardBtn.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        dashboardBtn.setIconTextGap(12);
+        dashboardBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                dashboardBtnActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 230, 50));
+        sideBarPanel.add(dashboardBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 230, 50));
 
-        jButton4.setBackground(new java.awt.Color(204, 255, 255));
-        jButton4.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources.Images/users-alt.png"))); // NOI18N
-        jButton4.setText("Donors & Receivers");
-        jButton4.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jButton4.setIconTextGap(12);
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        donorsReceiversBtn.setBackground(new java.awt.Color(204, 255, 255));
+        donorsReceiversBtn.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        donorsReceiversBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources.Images/users-alt.png"))); // NOI18N
+        donorsReceiversBtn.setText("Donors & Receivers");
+        donorsReceiversBtn.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        donorsReceiversBtn.setIconTextGap(12);
+        donorsReceiversBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                donorsReceiversBtnActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 230, 50));
+        sideBarPanel.add(donorsReceiversBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, 230, 50));
 
-        jButton5.setBackground(new java.awt.Color(204, 255, 255));
-        jButton5.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources.Images/people-arrows-left-right.png"))); // NOI18N
-        jButton5.setText("Donations & Distribution");
-        jButton5.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jButton5.setIconTextGap(12);
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        DonationsDistributionsBtn.setBackground(new java.awt.Color(204, 255, 255));
+        DonationsDistributionsBtn.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        DonationsDistributionsBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources.Images/people-arrows-left-right.png"))); // NOI18N
+        DonationsDistributionsBtn.setText("Donations & Distribution");
+        DonationsDistributionsBtn.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        DonationsDistributionsBtn.setIconTextGap(12);
+        DonationsDistributionsBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                DonationsDistributionsBtnActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, 230, 50));
+        sideBarPanel.add(DonationsDistributionsBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 260, 230, 50));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 650));
+        logoPanel.setBackground(new java.awt.Color(102, 153, 255));
+        logoPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel11.setBackground(new java.awt.Color(245, 245, 245));
-        jPanel11.setPreferredSize(new java.awt.Dimension(900, 700));
-        jPanel11.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        appNameLabel.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        appNameLabel.setForeground(new java.awt.Color(255, 255, 255));
+        appNameLabel.setText("CharmanApp");
+        logoPanel.add(appNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 20, -1, -1));
 
-        jTabbedPane1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        sideBarPanel.add(logoPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 250, 70));
 
-        jPanel12.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        getContentPane().add(sideBarPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 650));
 
-        jXTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "ID", "Name", "Gender", "Score", "Phone", "Email"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
-        jXTable1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jXTable1.setRowHeight(30);
-        jScrollPane1.setViewportView(jXTable1);
-        if (jXTable1.getColumnModel().getColumnCount() > 0) {
-            jXTable1.getColumnModel().getColumn(0).setMinWidth(40);
-            jXTable1.getColumnModel().getColumn(0).setPreferredWidth(50);
-            jXTable1.getColumnModel().getColumn(0).setMaxWidth(60);
-            jXTable1.getColumnModel().getColumn(2).setMinWidth(40);
-            jXTable1.getColumnModel().getColumn(2).setPreferredWidth(50);
-            jXTable1.getColumnModel().getColumn(2).setMaxWidth(70);
-            jXTable1.getColumnModel().getColumn(3).setMinWidth(50);
-            jXTable1.getColumnModel().getColumn(3).setPreferredWidth(60);
-            jXTable1.getColumnModel().getColumn(3).setMaxWidth(70);
-        }
-
-        jPanel12.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 860, 170));
-
-        jButton6.setBackground(new java.awt.Color(153, 204, 255));
-        jButton6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jButton6.setText("Add donor");
-        jButton6.setBorder(null);
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
-            }
-        });
-        jPanel12.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 30, 110, 30));
-
-        jTabbedPane1.addTab("Donors", jPanel12);
-
-        javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
-        jPanel13.setLayout(jPanel13Layout);
-        jPanel13Layout.setHorizontalGroup(
-            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 880, Short.MAX_VALUE)
-        );
-        jPanel13Layout.setVerticalGroup(
-            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 599, Short.MAX_VALUE)
-        );
-
-        jTabbedPane1.addTab("Receivers", jPanel13);
-
-        jPanel11.add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 880, 630));
-
-        getContentPane().add(jPanel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 0, -1, 650));
-
-        jPanel2.setBackground(new java.awt.Color(245, 245, 245));
-        jPanel2.setPreferredSize(new java.awt.Dimension(900, 700));
-        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jPanel7.setBackground(new java.awt.Color(255, 226, 230));
-        jPanel7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources.Images/sender (1).png"))); // NOI18N
-        jPanel7.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
-
-        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(204, 51, 0));
-        jLabel8.setText("150.000.000 vnđ");
-        jPanel7.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, -1, -1));
-
-        jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(204, 51, 0));
-        jLabel9.setText("98 donors");
-        jPanel7.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, -1, -1));
-
-        jPanel3.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 200, 170));
-
-        jPanel8.setBackground(new java.awt.Color(255, 244, 222));
-        jPanel8.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources.Images/receiver (1).png"))); // NOI18N
-        jPanel8.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
-
-        jPanel3.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 110, 210, 170));
-
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel5.setText("Donors & Receivers");
-        jPanel3.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, -1, -1));
-
-        jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 440, 290));
-
-        jPanel4.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jPanel9.setBackground(new java.awt.Color(220, 252, 231));
-        jPanel9.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources.Images/donation (1).png"))); // NOI18N
-        jPanel9.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
-
-        jPanel4.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 200, 170));
-
-        jPanel10.setBackground(new java.awt.Color(244, 232, 255));
-        jPanel10.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources.Images/distribution (1).png"))); // NOI18N
-        jPanel10.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
-
-        jPanel4.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 110, 200, 170));
-
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel1.setText("Donations & Distributions");
-        jPanel4.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, -1, -1));
-
-        jPanel2.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 10, 430, 290));
-
-        jPanel5.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel2.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 310, 320, 330));
-
-        jPanel6.setBackground(new java.awt.Color(255, 255, 255));
-
-        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
-        jPanel6.setLayout(jPanel6Layout);
-        jPanel6Layout.setHorizontalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 550, Short.MAX_VALUE)
-        );
-        jPanel6Layout.setVerticalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 330, Short.MAX_VALUE)
-        );
-
-        jPanel2.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 310, 550, -1));
-
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 0, -1, 650));
+        contentPanel.setBackground(new java.awt.Color(245, 245, 245));
+        contentPanel.setPreferredSize(new java.awt.Dimension(900, 700));
+        contentPanel.setLayout(new java.awt.CardLayout());
+        getContentPane().add(contentPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 0, -1, 650));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void eventsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eventsBtnActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_eventsBtnActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        jPanel2.setVisible(false);
-        jPanel11.setVisible(true);
-    }//GEN-LAST:event_jButton4ActionPerformed
+    private void donorsReceiversBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_donorsReceiversBtnActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    }//GEN-LAST:event_donorsReceiversBtnActionPerformed
+
+    private void DonationsDistributionsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DonationsDistributionsBtnActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton5ActionPerformed
+    }//GEN-LAST:event_DonationsDistributionsBtnActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        jPanel2.setVisible(true);
-        jPanel11.setVisible(false);
-    }//GEN-LAST:event_jButton3ActionPerformed
+    private void dashboardBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dashboardBtnActionPerformed
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        AddDonor addDonor = new AddDonor();
-        addDonor.setBounds(300, 200, 349, 511);
-        jPanel12.add(addDonor);   // TODO add your handling code here:
-    }//GEN-LAST:event_jButton6ActionPerformed
+    }//GEN-LAST:event_dashboardBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -382,36 +192,14 @@ public class Dashboard extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel10;
-    private javax.swing.JPanel jPanel11;
-    private javax.swing.JPanel jPanel12;
-    private javax.swing.JPanel jPanel13;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
-    private javax.swing.JPanel jPanel8;
-    private javax.swing.JPanel jPanel9;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTabbedPane jTabbedPane1;
-    private org.jdesktop.swingx.JXTable jXTable1;
+    private javax.swing.JButton DonationsDistributionsBtn;
+    private javax.swing.JLabel appNameLabel;
+    private javax.swing.JPanel contentPanel;
+    private javax.swing.JButton dashboardBtn;
+    private javax.swing.JButton donorsReceiversBtn;
+    private javax.swing.JButton eventsBtn;
+    private javax.swing.JPanel logoPanel;
+    private javax.swing.JButton logoutBtn;
+    private javax.swing.JPanel sideBarPanel;
     // End of variables declaration//GEN-END:variables
 }
