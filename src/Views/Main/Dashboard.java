@@ -135,7 +135,7 @@ public class Dashboard extends javax.swing.JFrame {
         contentPanel.setBackground(new java.awt.Color(245, 245, 245));
         contentPanel.setPreferredSize(new java.awt.Dimension(900, 700));
         contentPanel.setLayout(new java.awt.CardLayout());
-        getContentPane().add(contentPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 0, -1, 650));
+        getContentPane().add(contentPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 0, 890, 650));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

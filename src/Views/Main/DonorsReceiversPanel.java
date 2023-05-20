@@ -5,6 +5,8 @@
 package Views.Main;
 
 import ConnectDB.connect_db;
+import Controller.DonorController;
+import java.awt.BorderLayout;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -23,29 +25,9 @@ public class DonorsReceiversPanel extends javax.swing.JPanel {
     public DonorsReceiversPanel() {
         initComponents();
         
-        try {
-            Connection conn = connect_db.getConnection();
-            Statement st = conn.createStatement();
-            String query = "SELECT * FROM DONOR";
-            ResultSet rs = st.executeQuery(query);
-            
-            DefaultTableModel model = (DefaultTableModel) jXTable1.getModel();
-            String id, name, gender, email, phone, score;
-            while (rs.next()) {
-                id = rs.getString(1);
-                name = rs.getString(2);
-                gender = rs.getString(3);
-                email = rs.getString(7);
-                phone = rs.getString(4);
-                score = rs.getString(8);
-                String[] row = {id, name, gender, score, phone, email};
-                model.addRow(row);
-            }
-            st.close();
-            conn.close();
-        } catch (ClassNotFoundException | SQLException e) {
-            e.printStackTrace();
-        }
+        DonorController controller = new DonorController(donorViewPanel, donorAddBtn, donorSearchTF);
+        controller.setDataModel();
+        
     }
 
     /**
@@ -59,49 +41,42 @@ public class DonorsReceiversPanel extends javax.swing.JPanel {
 
         donorsReceiversPanel = new javax.swing.JTabbedPane();
         donorsPanel = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jXTable1 = new org.jdesktop.swingx.JXTable();
-        jButton6 = new javax.swing.JButton();
+        donorAddBtn = new javax.swing.JButton();
+        donorSearchTF = new javax.swing.JTextField();
+        donorViewPanel = new javax.swing.JPanel();
         receiversPanel = new javax.swing.JPanel();
 
         setLayout(new java.awt.BorderLayout());
 
         donorsReceiversPanel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
 
-        donorsPanel.setLayout(new java.awt.BorderLayout());
+        donorsPanel.setPreferredSize(new java.awt.Dimension(900, 700));
+        donorsPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jXTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "ID", "Name", "Gender", "Score", "Phone", "Email"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
-        jXTable1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jXTable1.setRowHeight(30);
-        jScrollPane1.setViewportView(jXTable1);
-
-        donorsPanel.add(jScrollPane1, java.awt.BorderLayout.CENTER);
-
-        jButton6.setBackground(new java.awt.Color(153, 204, 255));
-        jButton6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jButton6.setText("Add donor");
-        jButton6.setBorder(null);
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
+        donorAddBtn.setBackground(new java.awt.Color(153, 204, 255));
+        donorAddBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        donorAddBtn.setText("Add donor");
+        donorAddBtn.setBorder(null);
+        donorAddBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
+                donorAddBtnActionPerformed(evt);
             }
         });
-        donorsPanel.add(jButton6, java.awt.BorderLayout.PAGE_START);
+        donorsPanel.add(donorAddBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 10, 100, 30));
+        donorsPanel.add(donorSearchTF, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 290, 30));
+
+        javax.swing.GroupLayout donorViewPanelLayout = new javax.swing.GroupLayout(donorViewPanel);
+        donorViewPanel.setLayout(donorViewPanelLayout);
+        donorViewPanelLayout.setHorizontalGroup(
+            donorViewPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 820, Short.MAX_VALUE)
+        );
+        donorViewPanelLayout.setVerticalGroup(
+            donorViewPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 450, Short.MAX_VALUE)
+        );
+
+        donorsPanel.add(donorViewPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 820, 450));
 
         donorsReceiversPanel.addTab("Donors", donorsPanel);
 
@@ -109,11 +84,11 @@ public class DonorsReceiversPanel extends javax.swing.JPanel {
         receiversPanel.setLayout(receiversPanelLayout);
         receiversPanelLayout.setHorizontalGroup(
             receiversPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 900, Short.MAX_VALUE)
+            .addGap(0, 843, Short.MAX_VALUE)
         );
         receiversPanelLayout.setVerticalGroup(
             receiversPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 619, Short.MAX_VALUE)
+            .addGap(0, 522, Short.MAX_VALUE)
         );
 
         donorsReceiversPanel.addTab("Receivers", receiversPanel);
@@ -121,19 +96,19 @@ public class DonorsReceiversPanel extends javax.swing.JPanel {
         add(donorsReceiversPanel, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+    private void donorAddBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_donorAddBtnActionPerformed
         AddDonor addDonor = new AddDonor();
-        donorsPanel.remove(jXTable1);
-        donorsPanel.add(addDonor, BorderLayout.CENTER);   // TODO add your handling code here:
-    }//GEN-LAST:event_jButton6ActionPerformed
+//        donorsPanel.remove(jXTable1);
+//        donorsPanel.add(addDonor, BorderLayout.CENTER);   // TODO add your handling code here:
+    }//GEN-LAST:event_donorAddBtnActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton donorAddBtn;
+    private javax.swing.JTextField donorSearchTF;
+    private javax.swing.JPanel donorViewPanel;
     private javax.swing.JPanel donorsPanel;
     private javax.swing.JTabbedPane donorsReceiversPanel;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JScrollPane jScrollPane1;
-    private org.jdesktop.swingx.JXTable jXTable1;
     private javax.swing.JPanel receiversPanel;
     // End of variables declaration//GEN-END:variables
 }

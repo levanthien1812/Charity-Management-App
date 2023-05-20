@@ -8,6 +8,9 @@ package Models;
  *
  * @author THIEN
  */
-public class Donors {
-    
+public class Distribution {
+    private int receiver_id;
+    private int event_id;
+    private int category_id;
+    private double amount;
 }
