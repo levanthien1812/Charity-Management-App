@@ -13,4 +13,5 @@ import java.util.List;
  */
 public interface DonorDAO {
     public List<Donor> getList();
+    public Donor getDonor(int donor_id);
 }
