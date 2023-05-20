@@ -8,6 +8,7 @@ import DAO.DonorDAO;
 import DAO.DonorDAOImpl;
 import Models.Donor;
 import Utilities.TableModelUtil;
+import Views.Main.AddDonorFrame;
 import Views.Main.DonorDetailFrame;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -16,6 +17,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.List;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -31,7 +33,7 @@ import javax.swing.table.TableRowSorter;
  *
  * @author THIEN
  */
-public class DonorController {
+public class DonorsController {
     private JPanel viewPanel;
     private JButton addBtn;
     private JTextField searchField;
@@ -42,7 +44,7 @@ public class DonorController {
     
     private TableRowSorter<TableModel> rowSorter = null;
 
-    public DonorController(JPanel viewPanel, JButton addBtn, JTextField searchField) {
+    public DonorsController(JPanel viewPanel, JButton addBtn, JTextField searchField) {
         this.viewPanel = viewPanel;
         this.addBtn = addBtn;
         this.searchField = searchField;
@@ -111,9 +113,9 @@ public class DonorController {
                     ddf.setResizable(false);
                     ddf.setLocationRelativeTo(null);
                     ddf.setVisible(true);
+                    ddf.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                 }
             }
-            
         });
         
         JScrollPane scrollPane = new JScrollPane();
@@ -125,5 +127,20 @@ public class DonorController {
         viewPanel.add(scrollPane);
         viewPanel.validate();
         viewPanel.repaint();
+    }
+    
+    public void setAddDonorEvent() {
+        addBtn.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                AddDonorFrame adf = new AddDonorFrame();
+                adf.setTitle("Thêm người quyên góp");
+                adf.setResizable(false);
+                adf.setLocationRelativeTo(null);
+                adf.setVisible(true);
+                adf.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            }
+            
+        });
     }
 }

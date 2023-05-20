@@ -4,6 +4,8 @@
  */
 package Views.Main;
 
+import Controller.DonorDetailController;
+
 /**
  *
  * @author THIEN
@@ -19,6 +21,8 @@ public class DonorDetailFrame extends javax.swing.JFrame {
     
     public DonorDetailFrame(int donor_id) {
         initComponents();
+        DonorDetailController controller = new DonorDetailController(idTF, nameTF, genderPanel, phoneTF, date_of_birthDP, photoTF, emailTF, scoreLabel, addressTF);
+        controller.setView(donor_id);
     }
 
     /**
@@ -30,26 +34,103 @@ public class DonorDetailFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        genderButtonGroup = new javax.swing.ButtonGroup();
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        idTF = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        nameTF = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        addressTF = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        emailTF = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        phoneTF = new javax.swing.JTextField();
+        photoTF = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        scoreLabel = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        date_of_birthDP = new org.jdesktop.swingx.JXDatePicker();
+        genderPanel = new javax.swing.JPanel();
+        updateBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(900, 650));
+        setPreferredSize(new java.awt.Dimension(900, 500));
 
+        jPanel2.setPreferredSize(new java.awt.Dimension(900, 383));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Thông tin người quyên góp", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI Semibold", 0, 16))); // NOI18N
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setText("Mã khách hàng: ");
-        jPanel3.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, -1, -1));
+        jLabel1.setText("Mã người quyên góp: ");
+        jPanel3.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, -1, -1));
+        jPanel3.add(idTF, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 50, 230, 30));
 
-        jTextField1.setText("jTextField1");
-        jPanel3.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 40, 230, 30));
+        jLabel2.setText("Họ và tên: ");
+        jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, -1, -1));
+        jPanel3.add(nameTF, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 100, 230, 30));
 
-        jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 850, 360));
+        jLabel3.setText("Giới tính:");
+        jPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, -1, -1));
+
+        jLabel4.setText("Ngày sinh:");
+        jPanel3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, -1, -1));
+        jPanel3.add(addressTF, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 250, 230, 30));
+
+        jLabel5.setText("Địa chỉ: ");
+        jPanel3.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 260, -1, -1));
+
+        jLabel6.setText("Email:");
+        jPanel3.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 60, -1, -1));
+
+        emailTF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                emailTFActionPerformed(evt);
+            }
+        });
+        jPanel3.add(emailTF, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 50, 230, 30));
+
+        jLabel7.setText("Số điện thoại: ");
+        jPanel3.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 110, -1, -1));
+        jPanel3.add(phoneTF, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 100, 230, 30));
+
+        photoTF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                photoTFActionPerformed(evt);
+            }
+        });
+        jPanel3.add(photoTF, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 150, 230, 80));
+
+        jLabel8.setText("Liên kết ảnh đại diện:");
+        jPanel3.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 160, -1, -1));
+
+        scoreLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        scoreLabel.setText("304");
+        jPanel3.add(scoreLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 250, -1, -1));
+
+        jLabel11.setText("Điểm tích lũy: ");
+        jPanel3.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 260, -1, -1));
+        jPanel3.add(date_of_birthDP, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 200, 230, 30));
+
+        genderPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        genderPanel.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 15, 2));
+        jPanel3.add(genderPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 150, 230, 30));
+
+        jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 840, 310));
+
+        updateBtn.setBackground(new java.awt.Color(0, 102, 204));
+        updateBtn.setForeground(new java.awt.Color(255, 255, 255));
+        updateBtn.setText("Cập nhật");
+        updateBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateBtnActionPerformed(evt);
+            }
+        });
+        jPanel2.add(updateBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(705, 353, 140, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -59,11 +140,23 @@ public class DonorDetailFrame extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 471, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 415, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void emailTFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailTFActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_emailTFActionPerformed
+
+    private void photoTFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_photoTFActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_photoTFActionPerformed
+
+    private void updateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_updateBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -101,9 +194,27 @@ public class DonorDetailFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField addressTF;
+    private org.jdesktop.swingx.JXDatePicker date_of_birthDP;
+    private javax.swing.JTextField emailTF;
+    private javax.swing.ButtonGroup genderButtonGroup;
+    private javax.swing.JPanel genderPanel;
+    private javax.swing.JTextField idTF;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField nameTF;
+    private javax.swing.JTextField phoneTF;
+    private javax.swing.JTextField photoTF;
+    private javax.swing.JLabel scoreLabel;
+    private javax.swing.JButton updateBtn;
     // End of variables declaration//GEN-END:variables
 }

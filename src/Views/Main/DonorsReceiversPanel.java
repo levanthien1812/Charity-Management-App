@@ -5,7 +5,7 @@
 package Views.Main;
 
 import ConnectDB.connect_db;
-import Controller.DonorController;
+import Controller.DonorsController;
 import java.awt.BorderLayout;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -25,9 +25,9 @@ public class DonorsReceiversPanel extends javax.swing.JPanel {
     public DonorsReceiversPanel() {
         initComponents();
         
-        DonorController controller = new DonorController(donorViewPanel, donorAddBtn, donorSearchTF);
+        DonorsController controller = new DonorsController(donorViewPanel, donorAddBtn, donorSearchTF);
         controller.setDataModel();
-        
+        controller.setAddDonorEvent();
     }
 
     /**
@@ -44,6 +44,7 @@ public class DonorsReceiversPanel extends javax.swing.JPanel {
         donorAddBtn = new javax.swing.JButton();
         donorSearchTF = new javax.swing.JTextField();
         donorViewPanel = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
         receiversPanel = new javax.swing.JPanel();
 
         setLayout(new java.awt.BorderLayout());
@@ -73,10 +74,14 @@ public class DonorsReceiversPanel extends javax.swing.JPanel {
         );
         donorViewPanelLayout.setVerticalGroup(
             donorViewPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 450, Short.MAX_VALUE)
+            .addGap(0, 400, Short.MAX_VALUE)
         );
 
-        donorsPanel.add(donorViewPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 820, 450));
+        donorsPanel.add(donorViewPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 820, 400));
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
+        jLabel1.setText("Double click để xem chi tiết và cập nhật");
+        donorsPanel.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 470, -1, -1));
 
         donorsReceiversPanel.addTab("Donors", donorsPanel);
 
@@ -97,9 +102,7 @@ public class DonorsReceiversPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void donorAddBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_donorAddBtnActionPerformed
-        AddDonor addDonor = new AddDonor();
-//        donorsPanel.remove(jXTable1);
-//        donorsPanel.add(addDonor, BorderLayout.CENTER);   // TODO add your handling code here:
+
     }//GEN-LAST:event_donorAddBtnActionPerformed
 
 
@@ -109,6 +112,7 @@ public class DonorsReceiversPanel extends javax.swing.JPanel {
     private javax.swing.JPanel donorViewPanel;
     private javax.swing.JPanel donorsPanel;
     private javax.swing.JTabbedPane donorsReceiversPanel;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel receiversPanel;
     // End of variables declaration//GEN-END:variables
 }
